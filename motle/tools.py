@@ -1,18 +1,7 @@
 import sys
 from os import getenv, getcwd, path
 from pathlib import Path
-import glob
-
-DICTIONARIES = {
-    'fr_ODS8':{
-        'min':2,
-        'max':21
-    },
-    'fr_TEST':{
-        'min':4,
-        'max':8
-    }
-}
+from glob import glob
 
 def user_data_dir() -> Path:
     r"""
@@ -35,6 +24,17 @@ def user_data_dir() -> Path:
 
     return Path(os_path) / 'Motle'
 
+WORKING_DIR = getcwd()
+CURRENT_DIR = path.dirname(path.realpath(__file__))
+
+USER_DATA_DIR = user_data_dir()
+DICTIONARIES_DATA_DIR = path.join(USER_DATA_DIR,'dictionaries')
+
+DICTIONARIES = {
+    'fr_ODS8':[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+    'fr_TEST':[4,5,8]
+}
+
 def get_data_filepath(lang, dictionary, length):
     if '{}_{}'.format(lang.lower(), dictionary.upper()) in DICTIONARIES:
         return path.join(DICTIONARIES_DATA_DIR, '{}_{}_{}.json'.format(lang.lower(), dictionary.upper(), length))
@@ -45,19 +45,13 @@ def get_rawdata_filepath(lang, dictionary):
 
 def files_exists(lang, dictionary) -> bool:
     key = '{}_{}'.format(lang.lower(), dictionary.upper())
-    files = glob.glob(path.join(DICTIONARIES_DATA_DIR, '{}_*.json'.format(key)))
-    if len(files) == DICTIONARIES[key]['max']+1-DICTIONARIES[key]['min']:
-        res = True
+    files = glob(path.join(DICTIONARIES_DATA_DIR, '{}_*.json'.format(key)))
+    if len(files) == len(DICTIONARIES[key]):
+        return True
     else:
-        res = False
-    return res
+        return False
 
-WORKING_DIR = getcwd()
-CURRENT_DIR = path.dirname(path.realpath(__file__))
-
-USER_DATA_DIR = user_data_dir()
-DICTIONARIES_DATA_DIR = path.join(USER_DATA_DIR,'dictionaries')
-
+"""
 def create_ods(filename, out_filename=path.join('data','dictionary','ods_8.txt')):
     words = []
     with open(filename, 'r') as infile:
@@ -68,4 +62,4 @@ def create_ods(filename, out_filename=path.join('data','dictionary','ods_8.txt')
         outfile.write('\n'.join(words))
 
     print('File {} saved with {} words'.format(out_filename, len(words)))
-#create_ods(path.join('data','raw','wordle.txt'))
+#create_ods(path.join('data','raw','wordle.txt'))"""
