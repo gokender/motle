@@ -6,13 +6,22 @@ Motle is a library that allows you to search for words based on a dictionary by 
 
 For now I only have the French scrabble dictionary (OD_8)
 
+## How to install
+
+```shell
+pip install motle
+```
+
 ## How to use it
 
 ```python
 from motle import motle
 
-mot = motle.Motle(length=5)
+mot = motle.Motle()
+mot.count
+>> 411430
 
+mot = motle.Motle(length=5)
 mot.count
 >> 7980
 
