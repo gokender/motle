@@ -1,8 +1,10 @@
+from random import choice
+
 from motle import dictionary
 
 class Motle(dictionary.Dictionary):
 
-    def __init__(self, length, lang='fr', dictionary_name='ODS8'):
+    def __init__(self, lang='fr', dictionary_name='ODS8', length=None):
         
         self.dictionary = dictionary.Dictionary(lang, dictionary_name, length)
         self._reset()
@@ -46,3 +48,7 @@ class Motle(dictionary.Dictionary):
         for word in self.words:
             res.append(word['word'])
         return res
+
+    def random(self):
+        #TODO: check if null
+        return choice(self.words_str())
