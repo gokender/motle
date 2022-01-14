@@ -31,8 +31,8 @@ USER_DATA_DIR = user_data_dir()
 DICTIONARIES_DATA_DIR = path.join(USER_DATA_DIR,'dictionaries')
 
 DICTIONARIES = {
-    'fr_ODS8':[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
-    'fr_TEST':[4,5,8]
+    'fr_ODS8':[0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+    'fr_TEST':[0,4,5,8]
 }
 
 def get_data_filepath(lang, dictionary, length):

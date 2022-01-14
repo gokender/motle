@@ -22,6 +22,10 @@ class Dictionary:
         """
         self.lang = lang
         self.name = name
+
+        if length is None:
+            length = 0
+         
         self.length = length
 
         self.data_filepath = tools.get_data_filepath(self.lang, self.name, self.length)
@@ -78,6 +82,7 @@ class Dictionary:
         defdic = defaultdict(list)
         for word in words:
             wor = word.strip()
+            defdic[0].append(self._generate_word(wor))
             defdic[len(wor)].append(self._generate_word(wor))
 
         for key in defdic.keys():
